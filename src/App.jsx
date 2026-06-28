@@ -313,7 +313,7 @@ function App() {
             </div>
 
             <div className="level-box">
-              <span>Classe</span>
+              <span>Classe :</span>
               <strong>{studentLevel}</strong>
             </div>
             <div className="duration-box">{duration}</div>
