@@ -464,8 +464,10 @@ function App() {
                 </div>
                 <div
                   className="exercise-body clickable-photo-zone"
-                  onClick={() => triggerExerciseFileInput(exercise.id)}
-                  title="Cliquer pour choisir ou remplacer la photo"
+                  onClick={() => {
+                    if (!exercise.image) triggerExerciseFileInput(exercise.id);
+                  }}
+                  title={exercise.image ? '' : 'Cliquer pour choisir la photo'}
                 >
                   {exercise.image && (
                     <div className="photo-overlay-tools" onClick={(event) => event.stopPropagation()}>
