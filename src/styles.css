@@ -94,11 +94,10 @@ button {
   height: 78px;
   border: 3px solid #111;
   display: grid;
-  grid-template-columns: 250px 90px 60px 120px 1fr;
+  grid-template-columns: 250px 100px 70px 1fr;
 }
 
 .student-box,
-.note-box,
 .title-box {
   padding: 8px;
   border-right: 3px solid #111;
@@ -138,12 +137,12 @@ button {
 
 .duration-box {
   margin: 10px auto;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border: 2px solid #111;
   border-radius: 50%;
   text-align: center;
-  padding-top: 9px;
+  padding-top: 10px;
   font-weight: bold;
 }
 
@@ -156,8 +155,7 @@ button {
   background: white;
 }
 
-.dotted-line,
-.note-line {
+.dotted-line {
   border-bottom: 2px dotted #bbb;
   height: 25px;
 }
