@@ -299,7 +299,7 @@ function App() {
         <p className="eyebrow">A4 Exam Maker</p>
         <h1>Créer une feuille A4 avec entête fixe</h1>
         <p className="intro">
-          Les points se modifient dans le titre de chaque exercice. Le titre du devoir se modifie directement dans l’entête.
+          Les points se modifient dans le titre. La photo se choisit et se supprime directement dans sa zone.
         </p>
 
         <div className="form-group">
@@ -369,15 +369,6 @@ function App() {
               accept="image/*"
               onChange={(e) => handleExerciseImage(exercise.id, e.target.files?.[0])}
             />
-
-            <button
-              type="button"
-              className="secondary photo-delete-button"
-              onClick={() => clearExerciseImage(exercise.id)}
-              disabled={!exercise.image}
-            >
-              Supprimer photo
-            </button>
 
             {exercise.image && (
               <div className="photo-controls">
@@ -493,6 +484,19 @@ function App() {
                   onClick={() => triggerExerciseFileInput(exercise.id)}
                   title="Cliquer pour choisir ou remplacer la photo"
                 >
+                  {exercise.image && (
+                    <button
+                      type="button"
+                      className="photo-delete-overlay"
+                      onClick={(event) => {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        clearExerciseImage(exercise.id);
+                      }}
+                    >
+                      Supprimer
+                    </button>
+                  )}
                   {exercise.image ? (
                     <img
                       className="draggable-photo"
