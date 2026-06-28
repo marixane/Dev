@@ -33,6 +33,10 @@ body {
   margin-top: 14px;
 }
 
+.compact-group {
+  margin-top: 8px;
+}
+
 label {
   display: block;
   font-weight: bold;
@@ -84,17 +88,21 @@ button:disabled {
   font-weight: bold;
 }
 
-.exercise-name-display {
-  width: 100%;
-  min-height: 44px;
-  padding: 10px;
-  margin-top: 5px;
-  border: 2px solid #ddd;
-  border-radius: 6px;
-  background: #f8f8f8;
-  display: flex;
-  align-items: center;
+.exercise-control-card {
+  margin-top: 16px;
+  padding: 14px 12px 12px;
+  border: 2px solid #111;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.exercise-control-card legend {
+  padding: 3px 12px;
+  border: 2px solid #111;
+  border-radius: 8px;
+  background: white;
   font-weight: bold;
+  font-size: 15px;
 }
 
 .duration-control,
@@ -105,12 +113,24 @@ button:disabled {
   align-items: center;
 }
 
+.compact-control {
+  grid-template-columns: 34px 1fr 34px;
+  gap: 6px;
+}
+
 .duration-control button,
 .points-control button {
   height: 44px;
   margin-top: 0;
   font-size: 24px;
   line-height: 1;
+  padding: 0;
+}
+
+.compact-control button {
+  height: 34px;
+  font-size: 18px;
+  border-radius: 5px;
 }
 
 .duration-control strong,
@@ -123,6 +143,11 @@ button:disabled {
   border-radius: 6px;
   font-size: 16px;
   text-align: center;
+}
+
+.compact-control strong {
+  height: 34px;
+  font-size: 13px;
 }
 
 .points-control strong {
