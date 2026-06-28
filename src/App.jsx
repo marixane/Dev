@@ -1,160 +1,187 @@
-import { useMemo, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
-const MAX_IMAGES = 4;
-const MIN_IMAGES = 3;
+const DEFAULT_EXERCISES = [
+  { id: 'ex1', title: 'Exercice 1', points: '6 Pts', image: null },
+  { id: 'ex2', title: 'Exercice 2', points: '- Pts', image: null },
+  { id: 'ex3', title: 'Exercice 3', points: '- Pts', image: null },
+];
 
 function App() {
-  const [images, setImages] = useState([]);
-  const [title, setTitle] = useState('');
-  const [layout, setLayout] = useState('auto');
+  const [studentLevel, setStudentLevel] = useState('2 Bac SPF');
+  const [duration, setDuration] = useState('2 hs');
+  const [testTitle, setTestTitle] = useState('Devoir individuel de Mathématique');
+  const [testNumber, setTestNumber] = useState('N°: 1 Semestre: 1 Lycée El Jamai, Tanger');
+  const [teacher, setTeacher] = useState('Prof Marwane.R');
+  const [exercises, setExercises] = useState(DEFAULT_EXERCISES);
   const [isExporting, setIsExporting] = useState(false);
   const pageRef = useRef(null);
 
-  const selectedLayout = useMemo(() => {
-    if (layout !== 'auto') return layout;
-    return images.length === 3 ? 'three' : 'four';
-  }, [images.length, layout]);
+  const updateExercise = (id, field, value) => {
+    setExercises((items) =>
+      items.map((item) => (item.id === id ? { ...item, [field]: value } : item))
+    );
+  };
 
-  const handleImages = (event) => {
-    const files = Array.from(event.target.files || []);
-    const validFiles = files.filter((file) => file.type.startsWith('image/'));
+  const handleExerciseImage = (id, file) => {
+    if (!file || !file.type.startsWith('image/')) return;
 
-    const nextImages = validFiles.slice(0, MAX_IMAGES).map((file) => ({
-      id: crypto.randomUUID(),
+    updateExercise(id, 'image', {
       name: file.name,
       url: URL.createObjectURL(file),
-    }));
-
-    setImages(nextImages);
+    });
   };
 
-  const removeImage = (id) => {
-    setImages((currentImages) => currentImages.filter((image) => image.id !== id));
-  };
-
-  const clearImages = () => {
-    setImages([]);
+  const clearExerciseImage = (id) => {
+    updateExercise(id, 'image', null);
   };
 
   const exportPdf = async () => {
-    if (!pageRef.current || images.length < MIN_IMAGES) return;
+    if (!pageRef.current) return;
 
     setIsExporting(true);
 
     try {
       const canvas = await html2canvas(pageRef.current, {
         scale: 2,
-        useCORS: true,
         backgroundColor: '#ffffff',
+        useCORS: true,
       });
 
       const imageData = canvas.toDataURL('image/jpeg', 1);
-      const pdf = new jsPDF({
-        orientation: 'portrait',
-        unit: 'mm',
-        format: 'a4',
-      });
-
+      const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
       pdf.addImage(imageData, 'JPEG', 0, 0, 210, 297);
-      pdf.save('page-a4-photos.pdf');
+      pdf.save('devoir-a4.pdf');
     } finally {
       setIsExporting(false);
     }
   };
 
-  const canExport = images.length >= MIN_IMAGES && images.length <= MAX_IMAGES;
-
   return (
     <main className="app-shell">
       <section className="panel">
-        <div>
-          <p className="eyebrow">A4 Photo Maker</p>
-          <h1>Créer une page A4 avec 3 ou 4 photos</h1>
-          <p className="intro">
-            Importe tes photos, choisis le modèle, puis exporte une page A4 prête à imprimer.
-          </p>
+        <p className="eyebrow">A4 Exam Maker</p>
+        <h1>Créer une feuille A4 avec entête fixe</h1>
+        <p className="intro">
+          Ajoute une photo dans Exercice 1, 2 ou 3. L'entête reste fixe comme le modèle.
+        </p>
+
+        <div className="form-group">
+          <label>Niveau</label>
+          <input value={studentLevel} onChange={(e) => setStudentLevel(e.target.value)} />
         </div>
 
         <div className="form-group">
-          <label htmlFor="title">Titre optionnel</label>
-          <input
-            id="title"
-            type="text"
-            value={title}
-            onChange={(event) => setTitle(event.target.value)}
-            placeholder="Exemple : Photos de classe"
-          />
+          <label>Durée</label>
+          <input value={duration} onChange={(e) => setDuration(e.target.value)} />
         </div>
 
         <div className="form-group">
-          <label htmlFor="layout">Modèle</label>
-          <select
-            id="layout"
-            value={layout}
-            onChange={(event) => setLayout(event.target.value)}
-          >
-            <option value="auto">Automatique</option>
-            <option value="three">3 photos</option>
-            <option value="four">4 photos</option>
-          </select>
+          <label>Titre</label>
+          <input value={testTitle} onChange={(e) => setTestTitle(e.target.value)} />
         </div>
 
-        <div className="upload-box">
-          <label htmlFor="images">Importer 3 ou 4 photos</label>
-          <input
-            id="images"
-            type="file"
-            accept="image/*"
-            multiple
-            onChange={handleImages}
-          />
-          <p>{images.length}/4 photos sélectionnées</p>
+        <div className="form-group">
+          <label>Informations</label>
+          <input value={testNumber} onChange={(e) => setTestNumber(e.target.value)} />
         </div>
 
-        {images.length > 0 && (
-          <div className="thumb-list">
-            {images.map((image) => (
-              <button key={image.id} type="button" onClick={() => removeImage(image.id)}>
-                <img src={image.url} alt={image.name} />
-                <span>Supprimer</span>
+        <div className="form-group">
+          <label>Professeur</label>
+          <input value={teacher} onChange={(e) => setTeacher(e.target.value)} />
+        </div>
+
+        <hr />
+
+        {exercises.map((exercise) => (
+          <div className="exercise-control" key={exercise.id}>
+            <div className="two-cols">
+              <div>
+                <label>Nom exercice</label>
+                <input
+                  value={exercise.title}
+                  onChange={(e) => updateExercise(exercise.id, 'title', e.target.value)}
+                />
+              </div>
+              <div>
+                <label>Points</label>
+                <input
+                  value={exercise.points}
+                  onChange={(e) => updateExercise(exercise.id, 'points', e.target.value)}
+                />
+              </div>
+            </div>
+
+            <label>Photo pour {exercise.title}</label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => handleExerciseImage(exercise.id, e.target.files?.[0])}
+            />
+            {exercise.image && (
+              <button type="button" className="secondary" onClick={() => clearExerciseImage(exercise.id)}>
+                Supprimer la photo
               </button>
-            ))}
+            )}
           </div>
-        )}
+        ))}
 
-        <div className="actions">
-          <button type="button" className="secondary" onClick={clearImages} disabled={!images.length}>
-            Réinitialiser
-          </button>
-          <button type="button" onClick={exportPdf} disabled={!canExport || isExporting}>
-            {isExporting ? 'Export en cours...' : 'Exporter en PDF'}
-          </button>
-        </div>
-
-        {!canExport && (
-          <p className="warning">Ajoute exactement 3 ou 4 photos pour exporter.</p>
-        )}
+        <button type="button" onClick={exportPdf} disabled={isExporting}>
+          {isExporting ? 'Export en cours...' : 'Exporter PDF A4'}
+        </button>
       </section>
 
-      <section className="preview-zone" aria-label="Aperçu A4">
-        <div ref={pageRef} className={`a4-page layout-${selectedLayout}`}>
-          {title && <h2>{title}</h2>}
+      <section className="preview-zone">
+        <div className="a4-page exam-page" ref={pageRef}>
+          <header className="exam-header">
+            <div className="student-box">
+              <div className="small-badge">N°:</div>
+              <strong>Nom</strong>
+              <span>D'étudiant :</span>
+              <div className="dotted-line" />
+            </div>
 
-          <div className="photo-grid">
-            {images.map((image) => (
-              <figure key={image.id}>
-                <img src={image.url} alt={image.name} />
-              </figure>
-            ))}
+            <div className="level-box">{studentLevel}</div>
+            <div className="duration-box">{duration}</div>
 
-            {Array.from({ length: Math.max(0, MAX_IMAGES - images.length) }).map((_, index) => (
-              <figure key={`placeholder-${index}`} className="placeholder">
-                <span>Photo</span>
-              </figure>
+            <div className="note-box">
+              <strong>Note</strong>
+              <div className="note-line" />
+              <span>/20</span>
+            </div>
+
+            <div className="info-box">
+              <strong>{testTitle}</strong>
+              <span>{testNumber}</span>
+              <div className="teacher-line">{teacher}</div>
+            </div>
+          </header>
+
+          <p className="phone-rule">
+            L'usage du téléphone portable est interdit, même comme calculatrice.
+          </p>
+
+          <div className="exercise-list">
+            {exercises.map((exercise, index) => (
+              <section className="exam-exercise" key={exercise.id}>
+                <div className="exercise-title">
+                  {exercise.title} : * ( {exercise.points} ) *
+                </div>
+                <div className="exercise-body">
+                  {exercise.image ? (
+                    <img src={exercise.image.url} alt={exercise.image.name} />
+                  ) : (
+                    <div className="empty-zone">Photo de {exercise.title}</div>
+                  )}
+                </div>
+                {index === 1 && <span className="side-mark top">1P</span>}
+                {index === 1 && <span className="side-mark middle">1P</span>}
+              </section>
             ))}
           </div>
+
+          <div className="page-number">Page 1</div>
         </div>
       </section>
     </main>
