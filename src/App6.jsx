@@ -17,14 +17,15 @@ const RIGHT_TITLE_TOP = 'Lycée El jamai ,Tanger';
 const RIGHT_TITLE_BOTTOM = 'N° : 1 Semestre : 1';
 
 const clamp = (v, a, b) => Math.min(Math.max(Number(v), a), b);
-const fitSize = (text, big = 17, mid = 15, small = 13, tiny = 11) => {
-  const n = String(text ?? '').length;
+const fitSize = (text, big = 17, mid = 14, small = 12, tiny = 10, micro = 8) => {
+  const n = String(text ?? '').trim().length;
+  if (n > 54) return micro;
   if (n > 42) return tiny;
-  if (n > 32) return small;
-  if (n > 24) return mid;
+  if (n > 30) return small;
+  if (n > 18) return mid;
   return big;
 };
-const classSize = (text) => fitSize(text, 18, 16, 14, 12);
+const classSize = (text) => fitSize(text, 18, 15, 13, 11, 9);
 const fmt = (v) => {
   const n = Math.round(Number(v) * 100) / 100;
   return `${Number.isInteger(n) ? n : String(n).replace('.', ',')} ${n === 1 ? 'Point' : 'Points'}`;
