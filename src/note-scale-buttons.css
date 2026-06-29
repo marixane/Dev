@@ -6,7 +6,7 @@
 .note-scale-control {
   box-sizing: border-box !important;
   width: 100% !important;
-  min-height: 58px !important;
+  min-height: 62px !important;
   margin-top: 4px !important;
   padding: 6px !important;
   border-radius: 9px !important;
@@ -47,4 +47,14 @@
   background: #ecfdf5 !important;
   border-color: #86efac !important;
   color: #065f46 !important;
+}
+
+.note-scale-counter {
+  margin-top: 7px !important;
+  padding-top: 2px !important;
+  color: #374151 !important;
+  font-size: 11px !important;
+  font-weight: 900 !important;
+  line-height: 1.1 !important;
+  text-align: center !important;
 }
