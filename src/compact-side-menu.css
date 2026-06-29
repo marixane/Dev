@@ -70,13 +70,13 @@
 
 .page-count-grid {
   display: grid !important;
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 5px !important;
+  grid-template-columns: 1fr !important;
+  gap: 6px !important;
 }
 
 .page-count-card {
-  padding: 5px 4px !important;
-  min-height: 52px !important;
+  padding: 5px 6px !important;
+  min-height: 50px !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
@@ -88,7 +88,7 @@
 .page-count-card label {
   display: block !important;
   margin: 0 !important;
-  font-size: 10px !important;
+  font-size: 12px !important;
   font-weight: 900 !important;
   line-height: 1 !important;
   text-align: center !important;
@@ -97,13 +97,13 @@
 .page-count-card .compact-control {
   width: 100% !important;
   display: grid !important;
-  grid-template-columns: 20px 1fr 20px !important;
-  gap: 3px !important;
+  grid-template-columns: 24px 1fr 24px !important;
+  gap: 4px !important;
   align-items: center !important;
 }
 
 .page-count-card .compact-control button {
-  width: 20px !important;
+  width: 24px !important;
   height: 20px !important;
   min-height: 20px !important;
   padding: 0 !important;
@@ -112,7 +112,7 @@
 }
 
 .page-count-card .compact-control strong {
-  min-width: 56px !important;
+  min-width: 64px !important;
   height: 20px !important;
   line-height: 20px !important;
   padding: 0 !important;
