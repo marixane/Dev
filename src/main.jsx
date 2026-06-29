@@ -8,6 +8,7 @@ import './dark-background.css';
 import './photo-controls-opaque.css';
 import './page-status.css';
 import './extra-pages-full-height.css';
+import './header-duration-bigger.css';
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
