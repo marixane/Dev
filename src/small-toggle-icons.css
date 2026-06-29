@@ -1,0 +1,67 @@
+.panel {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.pdf-lines-toggle,
+.bar-ribbon-toggle {
+  width: 92px !important;
+  min-height: 54px !important;
+  height: 54px !important;
+  margin-top: 8px !important;
+  margin-bottom: 0 !important;
+  padding: 5px 7px 5px 36px !important;
+  position: relative !important;
+  align-self: flex-start !important;
+  border-radius: 10px !important;
+  font-size: 0 !important;
+  line-height: 1 !important;
+  text-align: left !important;
+}
+
+.pdf-lines-toggle::after,
+.bar-ribbon-toggle::after {
+  display: block !important;
+  font-size: 12px !important;
+  font-weight: 900 !important;
+  color: currentColor !important;
+  line-height: 1.1 !important;
+}
+
+.bar-ribbon-toggle::after {
+  content: 'Barème';
+}
+
+.pdf-lines-toggle::after {
+  content: 'Lignes';
+}
+
+.bar-ribbon-toggle::before,
+.pdf-lines-toggle::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 7px;
+  width: 22px;
+  height: 38px;
+  border: 1px solid #9ca3af;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.bar-ribbon-toggle::before {
+  background:
+    linear-gradient(to right, #111 0 3px, #e5e5e5 3px 14px, #8f8f8f 14px 17px, transparent 17px),
+    linear-gradient(to bottom, transparent 0 7px, #666 7px 8px, transparent 8px 18px, #666 18px 19px, transparent 19px 29px, #666 29px 30px, transparent 30px);
+}
+
+.pdf-lines-toggle::before {
+  background:
+    linear-gradient(to bottom, transparent 0 7px, #cfcfcf 7px 8px, transparent 8px 15px, #cfcfcf 15px 16px, transparent 16px 23px, #cfcfcf 23px 24px, transparent 24px 31px, #cfcfcf 31px 32px, transparent 32px),
+    #fff;
+}
+
+.pdf-lines-toggle.off,
+.bar-ribbon-toggle.off {
+  opacity: 0.65 !important;
+}
