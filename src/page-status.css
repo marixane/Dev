@@ -170,7 +170,8 @@
   display: none !important;
 }
 
-.pdf-lines-toggle {
+.pdf-lines-toggle,
+.bar-ribbon-toggle {
   width: 100%;
   min-height: 36px;
   margin: 10px 0 0 !important;
@@ -183,7 +184,8 @@
   cursor: pointer;
 }
 
-.pdf-lines-toggle.off {
+.pdf-lines-toggle.off,
+.bar-ribbon-toggle.off {
   border-color: #64748b !important;
   background: #f1f5f9 !important;
   color: #334155 !important;
@@ -199,6 +201,27 @@
   cursor: pointer !important;
   padding-top: 6px !important;
   padding-bottom: 6px !important;
+}
+
+.exam-page.has-bar-ribbon::before {
+  content: '';
+  position: absolute;
+  left: 48px;
+  top: 190px;
+  bottom: 34px;
+  width: 2px;
+  background: rgba(120, 120, 120, 0.55);
+  z-index: 30;
+  pointer-events: none;
+}
+
+.exam-page.second-page.has-bar-ribbon::before {
+  top: 34px;
+}
+
+.exam-page.has-bar-ribbon .exercise-list {
+  position: relative;
+  z-index: 1;
 }
 
 .exam-page.is-exporting .exercise-body {
