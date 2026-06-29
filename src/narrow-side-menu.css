@@ -12,9 +12,17 @@
 }
 
 .assignment-control button {
-  font-size: 11px !important;
+  height: 28px !important;
+  min-height: 28px !important;
+  font-size: 12px !important;
   padding-left: 5px !important;
   padding-right: 5px !important;
+}
+
+.total-mode-control {
+  height: 28px !important;
+  min-height: 28px !important;
+  font-size: 12px !important;
 }
 
 .page-count-card {
@@ -23,24 +31,55 @@
 }
 
 .page-count-card .compact-control {
-  grid-template-columns: 21px 1fr 21px !important;
+  grid-template-columns: 22px 1fr 22px !important;
   gap: 3px !important;
 }
 
 .page-count-card .compact-control button {
-  width: 21px !important;
+  width: 22px !important;
+  height: 22px !important;
+  min-height: 22px !important;
+  font-size: 13px !important;
 }
 
 .page-count-card .compact-control strong {
   min-width: 54px !important;
-  font-size: 10.5px !important;
+  height: 22px !important;
+  line-height: 22px !important;
+  font-size: 11px !important;
 }
 
 .page-count-card .compact-control strong::after {
-  font-size: 10.5px !important;
+  font-size: 11px !important;
 }
 
 .pdf-lines-toggle,
 .bar-ribbon-toggle {
-  width: 70px !important;
+  width: 100% !important;
+  min-height: 50px !important;
+  height: 50px !important;
+  margin-top: 4px !important;
+  padding: 5px 6px 5px 32px !important;
+  border-radius: 9px !important;
+  align-self: stretch !important;
+  background: #ffffff !important;
+  border: 1px solid #d1d5db !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08) !important;
+}
+
+.pdf-lines-toggle::after,
+.bar-ribbon-toggle::after {
+  font-size: 12px !important;
+}
+
+.pdf-lines-toggle::before,
+.bar-ribbon-toggle::before {
+  left: 7px !important;
+  top: 6px !important;
+}
+
+.panel > button:not(.pdf-lines-toggle):not(.bar-ribbon-toggle) {
+  height: 32px !important;
+  min-height: 32px !important;
+  font-size: 13px !important;
 }
