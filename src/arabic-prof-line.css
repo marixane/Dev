@@ -40,5 +40,5 @@ body.arabic-mode .right-header-cell {
 body.arabic-mode .exam-header .title-line-top,
 body.arabic-mode .exam-header .right-line-top,
 body.arabic-mode .exam-header .inline-class-input {
-  transform: translateY(3mm) !important;
+  transform: translateY(1mm) !important;
 }
