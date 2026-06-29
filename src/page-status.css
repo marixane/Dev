@@ -22,3 +22,44 @@
   color: #64748b;
   background: #e2e8f0 !important;
 }
+
+.total-mode-control {
+  width: 100%;
+  min-height: 40px;
+  margin: 12px 0 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  display: block !important;
+  font-size: 0 !important;
+  cursor: pointer;
+}
+
+.total-mode-control input {
+  display: none !important;
+}
+
+.total-mode-control::after {
+  content: "Total libre";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  border: 2px solid #f59e0b;
+  border-radius: 12px;
+  background: #fff7ed;
+  color: #9a3412;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.total-mode-control:has(input:checked)::after {
+  content: "Total bloqué : 20 pts";
+  border-color: #2563eb;
+  background: #eef6ff;
+  color: #111;
+}
+
+.panel .points-total {
+  display: none !important;
+}
