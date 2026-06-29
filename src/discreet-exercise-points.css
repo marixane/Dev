@@ -8,19 +8,17 @@
 .exercise-title-controls .points-decoration {
   display: inline !important;
   color: #111111 !important;
-  font-size: 0 !important;
+  font-size: 18px !important;
   font-weight: 900 !important;
   line-height: 20px !important;
+  width: 10px !important;
+  min-width: 10px !important;
+  text-align: center !important;
 }
 
-.exercise-title-controls .points-decoration:nth-of-type(2)::after {
-  content: '(' !important;
-  font-size: 18px !important;
-}
-
-.exercise-title-controls .points-decoration:nth-of-type(3)::after {
-  content: ')' !important;
-  font-size: 18px !important;
+.exercise-title-controls .points-decoration::after {
+  display: none !important;
+  content: none !important;
 }
 
 .exercise-title-controls button,
