@@ -25,56 +25,32 @@
 
 .total-mode-control {
   width: 100%;
-  min-height: 40px;
+  min-height: 38px;
   margin: 12px 0 0 !important;
-  padding: 0 !important;
-  border: 0 !important;
-  background: transparent !important;
-  display: block !important;
-  font-size: 0 !important;
+  padding: 8px 10px !important;
+  border: 2px solid #f59e0b !important;
+  border-radius: 12px !important;
+  background: #fff7ed !important;
+  color: #9a3412 !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px !important;
+  font-weight: 900 !important;
+  text-align: center;
   cursor: pointer;
+}
+
+.total-mode-control:has(input:checked) {
+  border-color: #2563eb !important;
+  background: #eef6ff !important;
+  color: #111 !important;
 }
 
 .total-mode-control input {
   display: none !important;
 }
 
-.total-mode-control::after {
-  content: "Total libre";
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 38px;
-  border: 2px solid #f59e0b;
-  border-radius: 12px;
-  background: #fff7ed;
-  color: #9a3412;
-  font-size: 16px;
-  font-weight: 900;
-}
-
-.total-mode-control:has(input:checked)::after {
-  content: "Total bloqué : 20 pts";
-  border-color: #2563eb;
-  background: #eef6ff;
-  color: #111;
-}
-
-.panel .points-total.locked {
+.panel .points-total {
   display: none !important;
-}
-
-.panel .points-total.free {
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-  min-height: 34px;
-  margin: 6px 0 0 !important;
-  padding: 6px 10px !important;
-  border: 2px solid #f59e0b !important;
-  border-radius: 10px !important;
-  background: #fff7ed !important;
-  color: #9a3412 !important;
-  font-size: 14px !important;
-  font-weight: 900 !important;
 }
