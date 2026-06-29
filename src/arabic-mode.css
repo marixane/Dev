@@ -108,3 +108,9 @@ body.arabic-mode .language-toggle {
   border-color: #86efac !important;
   color: #065f46 !important;
 }
+
+.exam-header .left-header-cell,
+.exam-header .middle-header-cell,
+.exam-header .right-header-cell {
+  border-width: 2px !important;
+}
