@@ -30,6 +30,8 @@ import './auto-scale-a4-preview.css';
 import './white-mask-fix.css';
 import './page-date-footer.css';
 import './page-date-footer.js';
+import './note-scale-buttons.css';
+import './note-scale-buttons.js';
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
