@@ -275,6 +275,23 @@
   z-index: 50 !important;
 }
 
+.exam-page::after {
+  content: 'Réaliser par Marwane.Rd Lycée El jamai, Tanger.';
+  position: absolute;
+  left: 24px;
+  bottom: 12px;
+  color: #d6d6d6;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  z-index: 45;
+  pointer-events: none;
+}
+
+.exam-page.is-exporting::after {
+  color: #d8d8d8 !important;
+}
+
 .exam-page.is-exporting .exercise-body {
   background-color: #ffffff !important;
   background-image: linear-gradient(to bottom, transparent 0, transparent 27px, #d9d9d9 28px, #d9d9d9 29px) !important;
