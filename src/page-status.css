@@ -54,3 +54,26 @@
 .panel .points-total {
   display: none !important;
 }
+
+.pdf-lines-toggle {
+  width: 100%;
+  min-height: 36px;
+  margin: 10px 0 0 !important;
+  border: 2px solid #16a34a !important;
+  border-radius: 12px !important;
+  background: #ecfdf5 !important;
+  color: #14532d !important;
+  font-size: 15px !important;
+  font-weight: 900 !important;
+  cursor: pointer;
+}
+
+.pdf-lines-toggle.off {
+  border-color: #64748b !important;
+  background: #f1f5f9 !important;
+  color: #334155 !important;
+}
+
+.exam-page.is-exporting.no-pdf-lines .exercise-body {
+  background: #ffffff !important;
+}
