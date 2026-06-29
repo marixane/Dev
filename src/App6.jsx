@@ -33,7 +33,7 @@ const profSize = (t) => t.length > 38 ? 12 : t.length > 26 ? 14 : 16;
 export default function App6() {
   const [kind, setKind] = useState('individual');
   const [title, setTitle] = useState(IND_TITLE);
-  const [level, setLevel] = useState('2 Bac SPF');
+  const [level, setLevel] = useState('Classes : 2 Bac SPF');
   const [teacher, setTeacher] = useState('Prof : Marwane.R');
   const [duration, setDuration] = useState(3);
   const [pages, setPages] = useState([exs(3), ...Array.from({ length: MAX_PAGES - 1 }, () => [])]);
