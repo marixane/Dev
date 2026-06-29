@@ -9,6 +9,7 @@ import './photo-controls-opaque.css';
 import './page-status.css';
 import './extra-pages-full-height.css';
 import './header-duration-bigger.css';
+import './points-buttons-below.css';
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
