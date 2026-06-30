@@ -10,7 +10,7 @@ const FR_HEADER = {
 const AR_HEADER = {
   rightTop: 'ثانوية الجامعي، طنجة',
   individualTitle: 'فرض محروس',
-  subject: 'الرياضيات',
+  subject: 'رقم 1 الدورة 1',
   level: 'قسم : 2 باك ع.ف'
 };
 
@@ -44,7 +44,7 @@ function syncHeaderLanguage() {
   var titleMiddle = document.querySelector('.title-line-middle');
   if (titleMiddle) {
     var currentMiddle = titleMiddle.value || '';
-    var isSubject = currentMiddle === FR_HEADER.subject || currentMiddle === AR_HEADER.subject;
+    var isSubject = currentMiddle === FR_HEADER.subject || currentMiddle === 'الرياضيات' || currentMiddle === AR_HEADER.subject;
     if (isSubject) setInputValue('.title-line-middle', header.subject);
   }
 }
