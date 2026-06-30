@@ -1,5 +1,10 @@
 window.__a4OverviewZoomLevel = window.__a4OverviewZoomLevel || 0;
 
+var A4_OVERVIEW_ZOOM_LABELS = {
+  1: 'Zoom 100%',
+  2: 'Zoom 75%'
+};
+
 function applyA4OverviewZoom() {
   document.body.classList.remove(
     'a4-overview-zoom-1',
@@ -88,7 +93,7 @@ function syncA4OverviewButton() {
   }
 
   var level = Number(window.__a4OverviewZoomLevel || 0);
-  button.textContent = level > 0 ? 'Zoom A4 ' + level + '/2' : 'Zoom A4';
+  button.textContent = level > 0 ? A4_OVERVIEW_ZOOM_LABELS[level] : 'Zoom A4';
   button.classList.toggle('active', level > 0);
 }
 
