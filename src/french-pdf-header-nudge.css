@@ -10,5 +10,5 @@ body:not(.arabic-mode) .exam-page.is-exporting .inline-class-input {
 
 body.arabic-mode .exam-page.is-exporting .title-line-top,
 body.arabic-mode .exam-page.is-exporting .right-line-top {
-  transform: translateY(-2px) !important;
+  transform: translateY(-4px) !important;
 }
