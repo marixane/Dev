@@ -177,16 +177,13 @@ function syncDurationLabels() {
   });
 }
 
-function scheduleDurationSync() {
-  syncDurationLabels();
-  setTimeout(syncDurationLabels, 40);
-}
-
 function bindDurationButtons() {
   document.querySelectorAll('.tiny-duration-control button').forEach(function (button) {
     if (button.dataset.durationSyncBound === 'true') return;
     button.dataset.durationSyncBound = 'true';
-    button.addEventListener('click', scheduleDurationSync);
+    button.addEventListener('click', function () {
+      setTimeout(syncDurationLabels, 60);
+    });
   });
 }
 
@@ -214,7 +211,7 @@ function syncLanguageMode() {
   syncMenuPageLabels();
   syncHeaderLanguage();
   bindDurationButtons();
-  scheduleDurationSync();
+  syncDurationLabels();
   syncExerciseTitles();
   if (typeof window.formatExercisePointLabels === 'function') window.formatExercisePointLabels();
 }
@@ -225,12 +222,16 @@ function queueLanguageSync() {
   syncQueued = true;
   setTimeout(function () {
     syncQueued = false;
-    syncLanguageMode();
-  }, 80);
+    syncLanguageButton();
+    syncPageNumberLabels();
+    syncMenuPageLabels();
+    syncExerciseTitles();
+    bindDurationButtons();
+  }, 250);
 }
 
 syncLanguageMode();
-setTimeout(syncLanguageMode, 150);
+setTimeout(syncLanguageMode, 250);
 
 if (document.body && window.MutationObserver) {
   new MutationObserver(queueLanguageSync).observe(document.body, { childList: true, subtree: true });
