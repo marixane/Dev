@@ -7,6 +7,7 @@ const MAX_EX = 6;
 const H1 = 990;
 const HN = 840;
 const MIN_H = 120;
+const MIN_H_EXTRA = 55;
 const DURATIONS = ['30 min', '1 h', '1 h 30', '2 h', '2 h 30', '3 h', '3 h 30', '4 h'];
 const BAR_POINTS = ['0,25', '0,75', '1,25', '1,75', '2,25', '2,75', '0,5', '1', '1,5', '2', '2,5', '3'];
 const IND_TITLE_TOP = 'Devoir individuel';
@@ -236,8 +237,9 @@ export default function App6() {
   const moveResize = (ev) => {
     if (!resize) return;
     const dy = ev.clientY - resize.sy;
-    const max = resize.start[resize.lower] - MIN_H;
-    const min = MIN_H - resize.start[resize.upper];
+    const limit = resize.page === 0 ? MIN_H : MIN_H_EXTRA;
+    const max = resize.start[resize.lower] - limit;
+    const min = limit - resize.start[resize.upper];
     const safe = clamp(dy, min, max);
     const next = resize.start.map((h, i) => i === resize.upper ? Math.round(h + safe) : i === resize.lower ? Math.round(h - safe) : h);
     setHs((cur) => cur.map((p, i) => i === resize.page ? next : p));
