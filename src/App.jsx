@@ -1,5 +1,15 @@
-import React from 'react';
-import App6 from './App6.jsx';
+import React, { useEffect, useState } from 'react';
+
+function ErrorBox({ error }) {
+  return (
+    <div style={{ padding: 40, color: 'white', fontFamily: 'Arial, sans-serif' }}>
+      <h1>Erreur Safari au chargement de App6</h1>
+      <pre style={{ whiteSpace: 'pre-wrap', background: '#111827', padding: 16, borderRadius: 8 }}>
+        {String(error && (error.stack || error.message || error))}
+      </pre>
+    </div>
+  );
+}
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -12,19 +22,12 @@ class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error) {
-    console.error('App6 error:', error);
+    console.error('App render error:', error);
   }
 
   render() {
     if (this.state.error) {
-      return (
-        <div style={{ padding: 40, color: 'white', fontFamily: 'Arial, sans-serif' }}>
-          <h1>Erreur Safari dans App6</h1>
-          <pre style={{ whiteSpace: 'pre-wrap', background: '#111827', padding: 16, borderRadius: 8 }}>
-            {String(this.state.error && (this.state.error.stack || this.state.error.message || this.state.error))}
-          </pre>
-        </div>
-      );
+      return <ErrorBox error={this.state.error} />;
     }
 
     return this.props.children;
@@ -32,9 +35,33 @@ class ErrorBoundary extends React.Component {
 }
 
 export default function App() {
+  const [LoadedApp, setLoadedApp] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    import('./App6.jsx')
+      .then((module) => {
+        setLoadedApp(() => module.default);
+      })
+      .catch((err) => {
+        console.error('App6 import error:', err);
+        setError(err);
+      });
+  }, []);
+
+  if (error) return <ErrorBox error={error} />;
+
+  if (!LoadedApp) {
+    return (
+      <div style={{ padding: 40, color: 'white', fontFamily: 'Arial, sans-serif' }}>
+        Chargement de App6...
+      </div>
+    );
+  }
+
   return (
     <ErrorBoundary>
-      <App6 />
+      <LoadedApp />
     </ErrorBoundary>
   );
 }
