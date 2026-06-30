@@ -61,9 +61,12 @@ body.arabic-mode .exam-page::after {
 }
 
 body.arabic-mode .exam-page.is-exporting .right-line-top,
-body.arabic-mode .exam-page.is-exporting .title-line-top,
-body.arabic-mode .exam-page.is-exporting .inline-class-input {
+body.arabic-mode .exam-page.is-exporting .title-line-top {
   transform: translateY(2mm) !important;
+}
+
+body.arabic-mode .exam-page.is-exporting .inline-class-input {
+  transform: translateY(1mm) !important;
 }
 
 body.arabic-mode .exam-page.has-bar-ribbon .exercise-body::before {
