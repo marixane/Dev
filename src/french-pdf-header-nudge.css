@@ -9,17 +9,17 @@ body:not(.arabic-mode) .exam-page.is-exporting .inline-class-input {
 }
 
 .exam-page.is-exporting .tiny-duration-control {
-  grid-template-columns: 14px 1.5cm 14px !important;
+  grid-template-columns: 14px 3cm 14px !important;
   max-width: none !important;
-  width: calc(1.5cm + 28px + 4px) !important;
+  width: calc(3cm + 28px + 4px) !important;
 }
 
 .exam-page.is-exporting .tiny-duration-control strong {
-  width: 1.5cm !important;
-  min-width: 1.5cm !important;
-  max-width: 1.5cm !important;
-  padding-left: 8px !important;
-  padding-right: 8px !important;
+  width: 3cm !important;
+  min-width: 3cm !important;
+  max-width: 3cm !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
 }
 
 body.arabic-mode .exam-page.is-exporting .title-line-top,
