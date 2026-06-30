@@ -7,7 +7,8 @@
   display: none !important;
 }
 
-.exam-page.is-exporting .exercise-title-controls .points-decoration:first-of-type {
+.exam-page.is-exporting .exercise-title-controls .points-decoration:first-of-type,
+.exam-page.is-exporting .exercise-title-controls .points-decoration:nth-of-type(2) {
   grid-column: 2 !important;
   transform: translateY(-1px) !important;
   width: auto !important;
@@ -23,7 +24,8 @@
   padding: 0 !important;
 }
 
-.exam-page.is-exporting .exercise-title-controls .points-decoration:last-of-type {
+.exam-page.is-exporting .exercise-title-controls .points-decoration:last-of-type,
+.exam-page.is-exporting .exercise-title-controls .points-decoration:nth-of-type(3) {
   grid-column: 4 !important;
   transform: translateY(-1px) !important;
   width: auto !important;
