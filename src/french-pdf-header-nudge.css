@@ -8,6 +8,17 @@ body:not(.arabic-mode) .exam-page.is-exporting .inline-class-input {
   transform: translateY(2px) !important;
 }
 
+.exam-page.is-exporting .tiny-duration-control {
+  grid-template-columns: 14px minmax(56px, 1fr) 14px !important;
+  max-width: 124px !important;
+}
+
+.exam-page.is-exporting .tiny-duration-control strong {
+  min-width: 56px !important;
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+}
+
 body.arabic-mode .exam-page.is-exporting .title-line-top,
 body.arabic-mode .exam-page.is-exporting .right-line-top {
   transform: translateY(-4px) !important;
