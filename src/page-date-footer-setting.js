@@ -23,6 +23,10 @@ function dateToText(date) {
   return dd + '/' + mm + '/' + yyyy;
 }
 
+function isSameDay(a, b) {
+  return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+}
+
 function getDateValue() {
   return localStorage.getItem(DATE_STORAGE_KEY) || todayText();
 }
@@ -89,6 +93,7 @@ function renderDatePicker() {
   const year = calendarMonthDate.getFullYear();
   const month = calendarMonthDate.getMonth();
   const selected = textToDate(getDateValue());
+  const today = new Date();
   const monthNames = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
   const dayNames = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
   const first = new Date(year, month, 1);
@@ -108,8 +113,10 @@ function renderDatePicker() {
 
   for (let day = 1; day <= daysInMonth; day += 1) {
     const current = new Date(year, month, day);
-    const active = current.toDateString() === selected.toDateString() ? ' active' : '';
-    html += '<button type="button" class="page-date-day' + active + '" data-day="' + day + '">' + day + '</button>';
+    const classes = ['page-date-day'];
+    if (isSameDay(current, today)) classes.push('today');
+    if (isSameDay(current, selected)) classes.push('active');
+    html += '<button type="button" class="' + classes.join(' ') + '" data-day="' + day + '">' + day + '</button>';
   }
 
   html += '</div>';
