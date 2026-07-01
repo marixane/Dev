@@ -1,3 +1,5 @@
+import './bar-mark-no-overlap.js';
+
 var gradingMarkActive = false;
 var gradingMarkBlockUntil = 0;
 
