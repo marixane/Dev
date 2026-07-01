@@ -1,3 +1,17 @@
 .page-count-card strong:not([data-exos-label-ready="true"]) {
   visibility: hidden !important;
 }
+
+.page-count-card strong[data-exos-label-ready="true"] {
+  direction: ltr !important;
+  unicode-bidi: isolate !important;
+}
+
+.page-count-card strong .exos-ar-letter,
+.page-count-card strong .exos-ar-number {
+  display: inline-block !important;
+}
+
+.page-count-card strong .exos-ar-letter {
+  margin-right: 6px !important;
+}
