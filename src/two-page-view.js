@@ -1,6 +1,10 @@
 const TWO_PAGE_VIEW_KEY = 'exam-two-page-view';
 let lastMultiplePageState = false;
 
+function isMobileTwoPageDisabled() {
+  return window.matchMedia('(max-width: 1200px)').matches;
+}
+
 function pageCount() {
   return document.querySelectorAll('.preview-zone .a4-page').length;
 }
@@ -10,15 +14,26 @@ function hasMultiplePages() {
 }
 
 function isTwoPageViewEnabled() {
+  if (isMobileTwoPageDisabled()) return false;
   return localStorage.getItem(TWO_PAGE_VIEW_KEY) !== 'false';
 }
 
 function setTwoPageView(enabled) {
+  if (isMobileTwoPageDisabled()) {
+    localStorage.setItem(TWO_PAGE_VIEW_KEY, 'false');
+    syncTwoPageView();
+    return;
+  }
   localStorage.setItem(TWO_PAGE_VIEW_KEY, enabled ? 'true' : 'false');
   syncTwoPageView();
 }
 
 function autoEnableWhenSecondPageAppears(multiple) {
+  if (isMobileTwoPageDisabled()) {
+    localStorage.setItem(TWO_PAGE_VIEW_KEY, 'false');
+    lastMultiplePageState = multiple;
+    return;
+  }
   if (multiple && !lastMultiplePageState) {
     localStorage.setItem(TWO_PAGE_VIEW_KEY, 'true');
   }
@@ -43,6 +58,12 @@ function getSteppedScale(rawScale) {
 }
 
 function updateSheetZoom(twoPageEnabled) {
+  if (isMobileTwoPageDisabled()) {
+    document.documentElement.style.setProperty('--sheet-columns', '1');
+    document.body.classList.remove('sheet-zoom-active');
+    return;
+  }
+
   const panel = document.querySelector('.panel');
   const panelWidth = (panel && panel.getBoundingClientRect().width) || 180;
   const gap = twoPageEnabled ? 10 : 6;
@@ -58,12 +79,17 @@ function updateSheetZoom(twoPageEnabled) {
 function syncTwoPageView() {
   const multiple = hasMultiplePages();
   autoEnableWhenSecondPageAppears(multiple);
-  const enabled = isTwoPageViewEnabled() && multiple;
+  const enabled = !isMobileTwoPageDisabled() && isTwoPageViewEnabled() && multiple;
   document.body.classList.toggle('two-page-view', enabled);
   updateSheetZoom(enabled);
 
   const button = document.querySelector('.two-page-view-toggle');
   if (!button) return;
+
+  if (isMobileTwoPageDisabled()) {
+    button.remove();
+    return;
+  }
 
   button.classList.toggle('on', enabled);
   button.classList.toggle('off', !enabled);
@@ -74,6 +100,12 @@ function syncTwoPageView() {
 }
 
 function ensureTwoPageViewButton() {
+  if (isMobileTwoPageDisabled()) {
+    document.querySelectorAll('.two-page-view-toggle').forEach((button) => button.remove());
+    document.body.classList.remove('two-page-view');
+    return;
+  }
+
   const panel = document.querySelector('.panel');
   if (!panel || panel.querySelector('.two-page-view-toggle')) return;
 
