@@ -1,5 +1,8 @@
 function updatePageExosLabels() {
-  document.querySelectorAll('.page-count-card').forEach(function (card) {
+  document.querySelectorAll('.page-count-card').forEach(function (card, index) {
+    var label = card.querySelector('label');
+    if (label) label.textContent = 'P' + (index + 1);
+
     var value = card.querySelector('strong');
     if (!value) return;
 
@@ -9,11 +12,7 @@ function updatePageExosLabels() {
     if (!match) return;
 
     var number = match[0];
-    if (window.__examLanguage === 'ar') {
-      value.innerHTML = '<span class="exos-ar-letter">ت</span><span class="exos-ar-number">' + number + '</span>';
-    } else {
-      value.textContent = number + ' Exos';
-    }
+    value.textContent = number;
     value.setAttribute('data-exos-label-ready', 'true');
   });
 }
