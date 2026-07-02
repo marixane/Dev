@@ -75,5 +75,7 @@ import './mobile-phone-settings.css';
 import './arabic-no-mirror.css';
 import './mobile-phone-force.js';
 import './safari-display-fix.css';
+import './mobile-touch-drag-fix.css';
+import './mobile-touch-drag-fix.js';
 
 createRoot(document.getElementById('root')).render(<React.StrictMode><App /></React.StrictMode>);
