@@ -13,24 +13,31 @@
   cursor: pointer !important;
   background: transparent !important;
   border: 0 !important;
-  padding: 2px 5px !important;
+  padding: 0 !important;
   margin: 0 !important;
-  border-radius: 5px !important;
+  border-radius: 0 !important;
   font-family: inherit !important;
+  width: auto !important;
+  min-width: 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  display: inline !important;
 }
 
 .page-date:hover {
   color: #2563eb !important;
-  background: rgba(37, 99, 235, 0.08) !important;
+  background: transparent !important;
+  text-decoration: underline !important;
 }
 
 body.hide-page-date .page-date {
-  display: block !important;
+  display: inline !important;
 }
 
 .exam-page.is-exporting .page-date {
   color: #777777 !important;
   background: transparent !important;
+  text-decoration: none !important;
 }
 
 .page-date-toggle,
