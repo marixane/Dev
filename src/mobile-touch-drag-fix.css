@@ -42,7 +42,25 @@
   }
 
   body .resize-handle {
-    min-height: 18px !important;
+    min-height: 28px !important;
+    height: 28px !important;
+    margin-top: 2px !important;
+    margin-bottom: 2px !important;
     touch-action: none !important;
+    cursor: ns-resize !important;
+  }
+
+  body .resize-handle::before,
+  body .resize-handle::after {
+    pointer-events: none !important;
+  }
+}
+
+@media (max-width: 430px) {
+  body .resize-handle {
+    min-height: 32px !important;
+    height: 32px !important;
+    margin-top: 3px !important;
+    margin-bottom: 3px !important;
   }
 }
