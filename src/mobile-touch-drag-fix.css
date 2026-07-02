@@ -1,0 +1,44 @@
+@media (max-width: 1200px) {
+  body .resize-handle,
+  body .bar-mark,
+  body .draggable-photo,
+  body .white-mask,
+  body .mask-resize-handle {
+    touch-action: none !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
+  }
+
+  body .bar-buttons,
+  body .bar-buttons button,
+  body .exercise-title-controls button,
+  body .page-count-card button,
+  body .note-scale-button,
+  body .pdf-lines-toggle,
+  body .bar-ribbon-toggle {
+    touch-action: manipulation !important;
+    pointer-events: auto !important;
+  }
+
+  body .bar-buttons button {
+    min-width: 26px !important;
+    min-height: 24px !important;
+    padding: 0 3px !important;
+    font-size: 9px !important;
+    line-height: 1 !important;
+  }
+
+  body .bar-mark {
+    min-width: 28px !important;
+    min-height: 20px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: grab !important;
+  }
+
+  body .resize-handle {
+    min-height: 18px !important;
+    touch-action: none !important;
+  }
+}
