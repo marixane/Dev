@@ -28,7 +28,7 @@ function applyMobilePhoneForce() {
         min-height: 100vh !important;
         max-height: 100vh !important;
         display: grid !important;
-        grid-template-columns: 10vw 90vw !important;
+        grid-template-columns: 11vw 89vw !important;
         grid-template-rows: 100vh !important;
         gap: 0 !important;
         padding: 0 !important;
@@ -41,11 +41,11 @@ function applyMobilePhoneForce() {
 
       body .panel {
         grid-column: 1 !important;
-        width: 10vw !important;
-        min-width: 10vw !important;
-        max-width: 10vw !important;
-        flex: 0 0 10vw !important;
-        flex-basis: 10vw !important;
+        width: 11vw !important;
+        min-width: 11vw !important;
+        max-width: 11vw !important;
+        flex: 0 0 11vw !important;
+        flex-basis: 11vw !important;
         height: 100vh !important;
         min-height: 100vh !important;
         max-height: 100vh !important;
@@ -54,7 +54,7 @@ function applyMobilePhoneForce() {
         align-items: center !important;
         justify-content: flex-start !important;
         gap: 5px !important;
-        padding: 6px 3px !important;
+        padding: 6px 2px !important;
         margin: 0 !important;
         overflow-y: auto !important;
         overflow-x: hidden !important;
@@ -65,6 +65,7 @@ function applyMobilePhoneForce() {
         box-shadow: none !important;
         position: relative !important;
         left: auto !important;
+        right: auto !important;
         top: auto !important;
         transform: none !important;
         scale: 1 !important;
@@ -109,16 +110,21 @@ function applyMobilePhoneForce() {
         width: 100% !important;
         max-width: 100% !important;
         min-width: 0 !important;
-        margin: 0 !important;
+        margin: 0 auto !important;
         padding: 0 !important;
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
+        justify-content: center !important;
         gap: 5px !important;
         border: 0 !important;
         background: transparent !important;
         box-shadow: none !important;
         box-sizing: border-box !important;
+        position: relative !important;
+        left: auto !important;
+        right: auto !important;
+        transform: none !important;
       }
 
       body .panel button,
@@ -128,20 +134,25 @@ function applyMobilePhoneForce() {
       body .bar-ribbon-toggle,
       body .panel > button:not(.pdf-lines-toggle):not(.bar-ribbon-toggle),
       body .page-count-card .compact-control button {
-        width: 30px !important;
-        min-width: 30px !important;
-        max-width: 30px !important;
-        height: 30px !important;
-        min-height: 30px !important;
+        width: 26px !important;
+        min-width: 26px !important;
+        max-width: 26px !important;
+        height: 26px !important;
+        min-height: 26px !important;
         padding: 0 !important;
-        margin: 0 !important;
+        margin: 0 auto !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
-        border-radius: 9px !important;
+        align-self: center !important;
+        border-radius: 8px !important;
         font-size: 0 !important;
         overflow: hidden !important;
         box-sizing: border-box !important;
+        position: relative !important;
+        left: auto !important;
+        right: auto !important;
+        transform: none !important;
       }
 
       body .panel button::before,
@@ -156,42 +167,46 @@ function applyMobilePhoneForce() {
         background: transparent !important;
         border: 0 !important;
         box-shadow: none !important;
-        font-size: 14px !important;
+        font-size: 12px !important;
         font-weight: 900 !important;
         color: currentColor !important;
+        line-height: 1 !important;
       }
 
       body .assignment-control button:nth-child(1)::before { content: 'I' !important; }
       body .assignment-control button:nth-child(2)::before { content: 'M' !important; }
-      body .note-scale-button:nth-child(1)::before { content: '10' !important; font-size: 12px !important; }
-      body .note-scale-button:nth-child(2)::before { content: '20' !important; font-size: 12px !important; }
+      body .note-scale-button:nth-child(1)::before { content: '10' !important; font-size: 10px !important; }
+      body .note-scale-button:nth-child(2)::before { content: '20' !important; font-size: 10px !important; }
       body .pdf-lines-toggle::before { content: 'L' !important; }
-      body .bar-ribbon-toggle::before { content: 'Pts' !important; font-size: 10px !important; }
+      body .bar-ribbon-toggle::before { content: 'Pts' !important; font-size: 8px !important; }
       body .pdf-lines-toggle::after,
       body .bar-ribbon-toggle::after { content: '' !important; display: none !important; }
 
       body .page-count-card .compact-control strong {
-        width: 30px !important;
-        min-width: 30px !important;
-        max-width: 30px !important;
-        height: 22px !important;
-        line-height: 22px !important;
+        width: 26px !important;
+        min-width: 26px !important;
+        max-width: 26px !important;
+        height: 20px !important;
+        line-height: 20px !important;
         padding: 0 !important;
-        border-radius: 7px !important;
-        font-size: 11px !important;
+        margin: 0 auto !important;
+        border-radius: 6px !important;
+        font-size: 10px !important;
+        align-self: center !important;
+        box-sizing: border-box !important;
       }
 
       body .page-count-card .compact-control strong::after { content: '' !important; display: none !important; }
       body .page-count-card .compact-control button:first-child::before { content: '-' !important; }
       body .page-count-card .compact-control button:last-child::before { content: '+' !important; }
-      body .panel > button.secondary::before { content: 'PDF' !important; font-size: 9px !important; }
+      body .panel > button.secondary::before { content: 'PDF' !important; font-size: 8px !important; }
 
       body .preview-zone {
         grid-column: 2 !important;
-        width: 90vw !important;
-        min-width: 90vw !important;
-        max-width: 90vw !important;
-        flex: 0 0 90vw !important;
+        width: 89vw !important;
+        min-width: 89vw !important;
+        max-width: 89vw !important;
+        flex: 0 0 89vw !important;
         flex-shrink: 1 !important;
         height: 100vh !important;
         min-height: 100vh !important;
@@ -202,7 +217,7 @@ function applyMobilePhoneForce() {
         justify-content: flex-start !important;
         justify-items: start !important;
         gap: 6px !important;
-        padding: 8px 0 40px 6px !important;
+        padding: 8px 0 40px 5px !important;
         margin: 0 !important;
         overflow: auto !important;
         box-sizing: border-box !important;
@@ -234,16 +249,17 @@ function applyMobilePhoneForce() {
       }
 
       body .app-shell {
-        grid-template-columns: 10vw 90vw !important;
+        grid-template-columns: 12vw 88vw !important;
       }
 
       body .panel {
-        width: 10vw !important;
-        min-width: 10vw !important;
-        max-width: 10vw !important;
-        flex-basis: 10vw !important;
-        padding: 5px 2px !important;
+        width: 12vw !important;
+        min-width: 12vw !important;
+        max-width: 12vw !important;
+        flex-basis: 12vw !important;
+        padding: 5px 1px !important;
         gap: 4px !important;
+        align-items: center !important;
       }
 
       body .panel button,
@@ -254,9 +270,11 @@ function applyMobilePhoneForce() {
       body .panel > button:not(.pdf-lines-toggle):not(.bar-ribbon-toggle),
       body .page-count-card .compact-control button,
       body .page-count-card .compact-control strong {
-        width: 26px !important;
-        min-width: 26px !important;
-        max-width: 26px !important;
+        width: 22px !important;
+        min-width: 22px !important;
+        max-width: 22px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
       }
 
       body .panel button,
@@ -266,15 +284,34 @@ function applyMobilePhoneForce() {
       body .bar-ribbon-toggle,
       body .panel > button:not(.pdf-lines-toggle):not(.bar-ribbon-toggle),
       body .page-count-card .compact-control button {
-        height: 26px !important;
-        min-height: 26px !important;
-        border-radius: 8px !important;
+        height: 22px !important;
+        min-height: 22px !important;
+        border-radius: 7px !important;
+      }
+
+      body .panel button::before,
+      body .assignment-control button::before,
+      body .note-scale-button::before,
+      body .pdf-lines-toggle::before,
+      body .bar-ribbon-toggle::before,
+      body .page-count-card .compact-control button::before {
+        font-size: 10px !important;
+      }
+
+      body .note-scale-button:nth-child(1)::before,
+      body .note-scale-button:nth-child(2)::before {
+        font-size: 9px !important;
+      }
+
+      body .bar-ribbon-toggle::before,
+      body .panel > button.secondary::before {
+        font-size: 7px !important;
       }
 
       body .preview-zone {
-        width: 90vw !important;
-        min-width: 90vw !important;
-        max-width: 90vw !important;
+        width: 88vw !important;
+        min-width: 88vw !important;
+        max-width: 88vw !important;
         padding: 6px 0 50px 4px !important;
         gap: 5px !important;
         overflow-y: auto !important;
@@ -295,6 +332,47 @@ function applyMobilePhoneForce() {
     }
 
     @media (max-width: 360px) {
+      body .app-shell {
+        grid-template-columns: 13vw 87vw !important;
+      }
+
+      body .panel {
+        width: 13vw !important;
+        min-width: 13vw !important;
+        max-width: 13vw !important;
+        flex-basis: 13vw !important;
+      }
+
+      body .preview-zone {
+        width: 87vw !important;
+        min-width: 87vw !important;
+        max-width: 87vw !important;
+      }
+
+      body .panel button,
+      body .assignment-control button,
+      body .note-scale-button,
+      body .pdf-lines-toggle,
+      body .bar-ribbon-toggle,
+      body .panel > button:not(.pdf-lines-toggle):not(.bar-ribbon-toggle),
+      body .page-count-card .compact-control button,
+      body .page-count-card .compact-control strong {
+        width: 21px !important;
+        min-width: 21px !important;
+        max-width: 21px !important;
+      }
+
+      body .panel button,
+      body .assignment-control button,
+      body .note-scale-button,
+      body .pdf-lines-toggle,
+      body .bar-ribbon-toggle,
+      body .panel > button:not(.pdf-lines-toggle):not(.bar-ribbon-toggle),
+      body .page-count-card .compact-control button {
+        height: 21px !important;
+        min-height: 21px !important;
+      }
+
       body .preview-zone .a4-page,
       body .a4-page {
         transform: scale(0.39) !important;
