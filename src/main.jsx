@@ -78,5 +78,6 @@ import './safari-display-fix.css';
 import './mobile-touch-drag-fix.css';
 import './mobile-touch-drag-fix.js';
 import './mobile-button-abbreviations.js';
+import './mobile-top-navbar-restore.js';
 
 createRoot(document.getElementById('root')).render(<React.StrictMode><App /></React.StrictMode>);
