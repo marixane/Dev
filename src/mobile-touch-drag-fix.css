@@ -20,6 +20,10 @@
     pointer-events: auto !important;
   }
 
+  body .photo-zoom-control {
+    display: none !important;
+  }
+
   body .bar-buttons button {
     min-width: 26px !important;
     min-height: 24px !important;
