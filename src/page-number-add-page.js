@@ -1,5 +1,5 @@
 function getFooterInfo(node) {
-  var match = String(node?.textContent || '').match(/Page\s+(\d+)\s*\/\s*(\d+)/i);
+  var match = String(node && node.textContent || '').match(/Page\s+(\d+)\s*\/\s*(\d+)/i);
   if (!match) return null;
   return { current: Number(match[1]), total: Number(match[2]) };
 }
@@ -9,7 +9,8 @@ function getCountCards() {
 }
 
 function getCardCount(card) {
-  var match = String(card?.querySelector('strong')?.textContent || '').match(/\d+/);
+  var strong = card && card.querySelector('strong');
+  var match = String(strong && strong.textContent || '').match(/\d+/);
   return match ? Number(match[0]) : 0;
 }
 
@@ -47,12 +48,12 @@ function ensurePageControlStyle() {
   if (document.getElementById('safe-page-controls-style')) return;
   var style = document.createElement('style');
   style.id = 'safe-page-controls-style';
-  style.textContent = '.page-number{display:inline-flex!important;align-items:center!important;justify-content:flex-end!important;gap:5px!important;pointer-events:auto!important;z-index:90!important;white-space:nowrap!important}.page-number-safe-controls{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:3px!important;pointer-events:auto!important;order:-1!important;margin-right:2px!important}.page-number-safe-controls button{width:17px!important;min-width:17px!important;height:17px!important;min-height:17px!important;border-radius:50%!important;border:1px solid #94a3b8!important;background:#fff!important;color:#0f172a!important;font-size:12px!important;font-weight:900!important;line-height:1!important;padding:0!important;margin:0!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;cursor:pointer!important;box-sizing:border-box!important}.page-number-safe-controls button:hover{background:#e0f2fe!important;border-color:#2563eb!important;color:#1d4ed8!important}.page-number-safe-controls button.minus:hover{background:#fee2e2!important;border-color:#dc2626!important;color:#b91c1c!important}.page-number-safe-controls button:disabled{opacity:.35!important;cursor:not-allowed!important}@media print{.page-number-safe-controls{display:none!important}}';
+  style.textContent = '.page-number{pointer-events:auto!important;z-index:90!important}.page-number-safe-controls{position:absolute!important;right:88px!important;bottom:23px!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:4px!important;pointer-events:auto!important;z-index:999!important}.page-number-safe-controls button{width:20px!important;min-width:20px!important;height:20px!important;min-height:20px!important;border-radius:50%!important;border:1px solid #64748b!important;background:#ffffff!important;color:#0f172a!important;font-size:14px!important;font-weight:900!important;line-height:1!important;padding:0!important;margin:0!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;cursor:pointer!important;box-sizing:border-box!important;box-shadow:0 1px 3px rgba(15,23,42,.18)!important}.page-number-safe-controls button:hover{background:#e0f2fe!important;border-color:#2563eb!important;color:#1d4ed8!important}.page-number-safe-controls button.minus:hover{background:#fee2e2!important;border-color:#dc2626!important;color:#b91c1c!important}.page-number-safe-controls button:disabled{opacity:.35!important;cursor:not-allowed!important}@media(max-width:1200px){.page-number-safe-controls{right:78px!important;bottom:20px!important}.page-number-safe-controls button{width:18px!important;min-width:18px!important;height:18px!important;min-height:18px!important;font-size:13px!important}}@media print{.page-number-safe-controls{display:none!important}}';
   document.head.appendChild(style);
 }
 
-function makeControls(node) {
-  var controls = document.createElement('span');
+function makeControls(pageNode) {
+  var controls = document.createElement('div');
   controls.className = 'page-number-safe-controls';
 
   var minus = document.createElement('button');
@@ -70,14 +71,16 @@ function makeControls(node) {
   minus.addEventListener('click', function (event) {
     event.preventDefault();
     event.stopPropagation();
-    var info = getFooterInfo(node);
+    var pageNumber = pageNode.querySelector('.page-number');
+    var info = getFooterInfo(pageNumber);
     if (info) removeLastPage(info.total);
   });
 
   plus.addEventListener('click', function (event) {
     event.preventDefault();
     event.stopPropagation();
-    var info = getFooterInfo(node);
+    var pageNumber = pageNode.querySelector('.page-number');
+    var info = getFooterInfo(pageNumber);
     if (info) addPage(info.total);
   });
 
@@ -89,15 +92,21 @@ function makeControls(node) {
 function syncPageNumberControls() {
   ensurePageControlStyle();
 
-  document.querySelectorAll('.page-number').forEach(function (node) {
-    var info = getFooterInfo(node);
+  document.querySelectorAll('.a4-page').forEach(function (pageNode) {
+    var pageNumber = pageNode.querySelector('.page-number');
+    var info = getFooterInfo(pageNumber);
     if (!info) return;
 
-    var old = node.querySelector('.page-number-safe-controls');
-    if (!old) old = makeControls(node);
-    if (node.firstChild !== old) node.insertBefore(old, node.firstChild);
+    var oldInside = pageNumber && pageNumber.querySelector('.page-number-safe-controls');
+    if (oldInside) oldInside.remove();
 
-    var minus = old.querySelector('.minus');
+    var controls = pageNode.querySelector(':scope > .page-number-safe-controls');
+    if (!controls) {
+      controls = makeControls(pageNode);
+      pageNode.appendChild(controls);
+    }
+
+    var minus = controls.querySelector('.minus');
     if (minus) minus.disabled = info.total <= 1;
   });
 }
@@ -105,5 +114,6 @@ function syncPageNumberControls() {
 syncPageNumberControls();
 setTimeout(syncPageNumberControls, 200);
 setTimeout(syncPageNumberControls, 700);
+setTimeout(syncPageNumberControls, 1200);
 setInterval(syncPageNumberControls, 500);
 window.addEventListener('resize', syncPageNumberControls);
