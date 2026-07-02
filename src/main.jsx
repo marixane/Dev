@@ -74,5 +74,6 @@ import './pdf-original-size-now.js';
 import './mobile-phone-settings.css';
 import './arabic-no-mirror.css';
 import './mobile-phone-force.js';
+import './safari-display-fix.css';
 
 createRoot(document.getElementById('root')).render(<React.StrictMode><App /></React.StrictMode>);
