@@ -26,8 +26,7 @@ function clickCardButton(card, wanted) {
 }
 
 function addPage(total) {
-  var card = getCountCards()[total];
-  clickCardButton(card, '+');
+  clickCardButton(getCountCards()[total], '+');
 }
 
 function removeLastPage(total) {
@@ -48,13 +47,13 @@ function ensurePageControlStyle() {
   if (document.getElementById('safe-page-controls-style')) return;
   var style = document.createElement('style');
   style.id = 'safe-page-controls-style';
-  style.textContent = '.page-number-safe-controls{position:fixed!important;display:inline-flex!important;gap:3px!important;z-index:999999!important;pointer-events:auto!important}.page-number-safe-controls button{width:16px!important;min-width:16px!important;height:16px!important;min-height:16px!important;border-radius:50%!important;border:1px solid #94a3b8!important;background:#fff!important;color:#0f172a!important;font-size:12px!important;font-weight:900!important;line-height:1!important;padding:0!important;margin:0!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;cursor:pointer!important}.page-number-safe-controls button:hover{background:#e0f2fe!important;border-color:#2563eb!important;color:#1d4ed8!important}.page-number-safe-controls button.minus:hover{background:#fee2e2!important;border-color:#dc2626!important;color:#b91c1c!important}.page-number-safe-controls button:disabled{opacity:.35!important;cursor:not-allowed!important}@media print{.page-number-safe-controls{display:none!important}}';
+  style.textContent = '.page-number{display:inline-flex!important;align-items:center!important;justify-content:flex-end!important;gap:5px!important;pointer-events:auto!important;z-index:90!important}.page-number-safe-controls{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:3px!important;pointer-events:auto!important}.page-number-safe-controls button{width:17px!important;min-width:17px!important;height:17px!important;min-height:17px!important;border-radius:50%!important;border:1px solid #94a3b8!important;background:#fff!important;color:#0f172a!important;font-size:12px!important;font-weight:900!important;line-height:1!important;padding:0!important;margin:0!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;cursor:pointer!important;box-sizing:border-box!important}.page-number-safe-controls button:hover{background:#e0f2fe!important;border-color:#2563eb!important;color:#1d4ed8!important}.page-number-safe-controls button.minus:hover{background:#fee2e2!important;border-color:#dc2626!important;color:#b91c1c!important}.page-number-safe-controls button:disabled{opacity:.35!important;cursor:not-allowed!important}@media print{.page-number-safe-controls{display:none!important}}';
   document.head.appendChild(style);
 }
 
-function makeControl(node) {
-  var control = document.createElement('span');
-  control.className = 'page-number-safe-controls';
+function makeControls(node) {
+  var controls = document.createElement('span');
+  controls.className = 'page-number-safe-controls';
 
   var minus = document.createElement('button');
   minus.type = 'button';
@@ -64,6 +63,7 @@ function makeControl(node) {
 
   var plus = document.createElement('button');
   plus.type = 'button';
+  plus.className = 'plus';
   plus.textContent = '+';
   plus.title = 'Ajouter une page';
 
@@ -81,34 +81,24 @@ function makeControl(node) {
     if (info) addPage(info.total);
   });
 
-  control.appendChild(minus);
-  control.appendChild(plus);
-  document.body.appendChild(control);
-  return control;
+  controls.appendChild(minus);
+  controls.appendChild(plus);
+  return controls;
 }
 
 function syncPageNumberControls() {
   ensurePageControlStyle();
-  var pageNumbers = Array.from(document.querySelectorAll('.page-number'));
-  var alive = new Set();
 
-  pageNumbers.forEach(function (node, index) {
+  document.querySelectorAll('.page-number').forEach(function (node) {
     var info = getFooterInfo(node);
     if (!info) return;
 
-    var id = 'page-number-control-' + index;
-    alive.add(id);
-    var control = document.querySelector('[data-page-number-control="' + id + '"]') || makeControl(node);
-    control.dataset.pageNumberControl = id;
+    var old = node.querySelector('.page-number-safe-controls');
+    if (!old) old = makeControls(node);
+    if (!old.parentNode) node.appendChild(old);
 
-    var rect = node.getBoundingClientRect();
-    control.style.left = Math.round(rect.right + 5) + 'px';
-    control.style.top = Math.round(rect.top + rect.height / 2 - 8) + 'px';
-    control.querySelector('.minus').disabled = info.total <= 1;
-  });
-
-  document.querySelectorAll('.page-number-safe-controls').forEach(function (control) {
-    if (!alive.has(control.dataset.pageNumberControl)) control.remove();
+    var minus = old.querySelector('.minus');
+    if (minus) minus.disabled = info.total <= 1;
   });
 }
 
@@ -117,4 +107,3 @@ setTimeout(syncPageNumberControls, 200);
 setTimeout(syncPageNumberControls, 700);
 setInterval(syncPageNumberControls, 500);
 window.addEventListener('resize', syncPageNumberControls);
-document.addEventListener('scroll', syncPageNumberControls, true);
