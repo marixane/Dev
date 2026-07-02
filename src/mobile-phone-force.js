@@ -227,15 +227,78 @@ function applyMobilePhoneForce() {
     }
 
     @media (max-width: 430px) {
+      html,
+      body,
+      #root {
+        overflow: hidden !important;
+      }
+
+      body .app-shell {
+        grid-template-columns: 10vw 90vw !important;
+      }
+
+      body .panel {
+        width: 10vw !important;
+        min-width: 10vw !important;
+        max-width: 10vw !important;
+        flex-basis: 10vw !important;
+        padding: 5px 2px !important;
+        gap: 4px !important;
+      }
+
+      body .panel button,
+      body .assignment-control button,
+      body .note-scale-button,
+      body .pdf-lines-toggle,
+      body .bar-ribbon-toggle,
+      body .panel > button:not(.pdf-lines-toggle):not(.bar-ribbon-toggle),
+      body .page-count-card .compact-control button,
+      body .page-count-card .compact-control strong {
+        width: 26px !important;
+        min-width: 26px !important;
+        max-width: 26px !important;
+      }
+
+      body .panel button,
+      body .assignment-control button,
+      body .note-scale-button,
+      body .pdf-lines-toggle,
+      body .bar-ribbon-toggle,
+      body .panel > button:not(.pdf-lines-toggle):not(.bar-ribbon-toggle),
+      body .page-count-card .compact-control button {
+        height: 26px !important;
+        min-height: 26px !important;
+        border-radius: 8px !important;
+      }
+
+      body .preview-zone {
+        width: 90vw !important;
+        min-width: 90vw !important;
+        max-width: 90vw !important;
+        padding: 6px 0 50px 4px !important;
+        gap: 5px !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+      }
+
       body .preview-zone .a4-page,
       body .a4-page {
-        transform: scale(0.50) !important;
-        margin-bottom: -540px !important;
+        transform: scale(0.42) !important;
+        transform-origin: top left !important;
+        margin: 0 0 -650px 0 !important;
       }
 
       body .preview-zone .a4-page:last-child,
       body .a4-page:last-child {
-        margin-bottom: 40px !important;
+        margin-bottom: 50px !important;
+      }
+    }
+
+    @media (max-width: 360px) {
+      body .preview-zone .a4-page,
+      body .a4-page {
+        transform: scale(0.39) !important;
+        margin-bottom: -685px !important;
       }
     }
   `;
