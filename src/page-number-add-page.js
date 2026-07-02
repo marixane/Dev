@@ -47,7 +47,7 @@ function ensurePageControlStyle() {
   if (document.getElementById('safe-page-controls-style')) return;
   var style = document.createElement('style');
   style.id = 'safe-page-controls-style';
-  style.textContent = '.page-number{display:inline-flex!important;align-items:center!important;justify-content:flex-end!important;gap:5px!important;pointer-events:auto!important;z-index:90!important}.page-number-safe-controls{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:3px!important;pointer-events:auto!important}.page-number-safe-controls button{width:17px!important;min-width:17px!important;height:17px!important;min-height:17px!important;border-radius:50%!important;border:1px solid #94a3b8!important;background:#fff!important;color:#0f172a!important;font-size:12px!important;font-weight:900!important;line-height:1!important;padding:0!important;margin:0!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;cursor:pointer!important;box-sizing:border-box!important}.page-number-safe-controls button:hover{background:#e0f2fe!important;border-color:#2563eb!important;color:#1d4ed8!important}.page-number-safe-controls button.minus:hover{background:#fee2e2!important;border-color:#dc2626!important;color:#b91c1c!important}.page-number-safe-controls button:disabled{opacity:.35!important;cursor:not-allowed!important}@media print{.page-number-safe-controls{display:none!important}}';
+  style.textContent = '.page-number{display:inline-flex!important;align-items:center!important;justify-content:flex-end!important;gap:5px!important;pointer-events:auto!important;z-index:90!important;white-space:nowrap!important}.page-number-safe-controls{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:3px!important;pointer-events:auto!important;order:-1!important;margin-right:2px!important}.page-number-safe-controls button{width:17px!important;min-width:17px!important;height:17px!important;min-height:17px!important;border-radius:50%!important;border:1px solid #94a3b8!important;background:#fff!important;color:#0f172a!important;font-size:12px!important;font-weight:900!important;line-height:1!important;padding:0!important;margin:0!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;cursor:pointer!important;box-sizing:border-box!important}.page-number-safe-controls button:hover{background:#e0f2fe!important;border-color:#2563eb!important;color:#1d4ed8!important}.page-number-safe-controls button.minus:hover{background:#fee2e2!important;border-color:#dc2626!important;color:#b91c1c!important}.page-number-safe-controls button:disabled{opacity:.35!important;cursor:not-allowed!important}@media print{.page-number-safe-controls{display:none!important}}';
   document.head.appendChild(style);
 }
 
@@ -95,7 +95,7 @@ function syncPageNumberControls() {
 
     var old = node.querySelector('.page-number-safe-controls');
     if (!old) old = makeControls(node);
-    if (!old.parentNode) node.appendChild(old);
+    if (node.firstChild !== old) node.insertBefore(old, node.firstChild);
 
     var minus = old.querySelector('.minus');
     if (minus) minus.disabled = info.total <= 1;
