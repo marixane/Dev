@@ -6,6 +6,17 @@ function applyMobileButtonAbbreviations() {
   style.id = 'mobile-button-abbreviations-style';
   style.textContent = `
     @media (max-width: 1200px) {
+      html body .preview-pdf-button {
+        display: none !important;
+      }
+
+      html body .download-pdf-button {
+        background: #2563eb !important;
+        color: #ffffff !important;
+        border: 1px solid #1d4ed8 !important;
+        opacity: 1 !important;
+      }
+
       html body .assignment-control button {
         background: #e2e8f0 !important;
         color: #0f172a !important;
@@ -24,7 +35,6 @@ function applyMobileButtonAbbreviations() {
       html body .note-scale-button::before,
       html body .pdf-lines-toggle::before,
       html body .bar-ribbon-toggle::before,
-      html body .preview-pdf-button::before,
       html body .download-pdf-button::before,
       html body .page-count-card .compact-control button::before,
       html body .mobile-lang-ar::before,
@@ -76,7 +86,6 @@ function applyMobileButtonAbbreviations() {
 
       html body .pdf-lines-toggle::before { content: 'Lig' !important; font-size: 6.5px !important; }
       html body .bar-ribbon-toggle::before { content: 'Bar' !important; font-size: 6.5px !important; }
-      html body .preview-pdf-button::before { content: 'Voir' !important; font-size: 5.8px !important; }
       html body .download-pdf-button::before,
       html body .panel > button.secondary::before { content: 'PDF' !important; font-size: 6.8px !important; }
 
@@ -114,7 +123,6 @@ function applyMobileButtonAbbreviations() {
       html body button[class*="français"]::before,
       html body button[data-lang="fr"]::before { font-size: 6px !important; }
 
-      html body .preview-pdf-button::before { font-size: 5.4px !important; }
       html body .note-scale-button.active::after { min-width: 12px !important; height: 8px !important; font-size: 4.8px !important; }
     }
   `;
