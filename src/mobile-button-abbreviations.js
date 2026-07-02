@@ -128,6 +128,10 @@ function applyMobileButtonAbbreviations() {
   `;
   document.head.appendChild(style);
 
+  document.querySelectorAll('.preview-pdf-button').forEach(function (button) {
+    button.remove();
+  });
+
   document.querySelectorAll('button').forEach(function (button) {
     var label = ((button.textContent || '') + ' ' + (button.getAttribute('aria-label') || '')).trim().toLowerCase();
     if (label.includes('arabe') || label.includes('arabic')) button.classList.add('mobile-lang-ar');
