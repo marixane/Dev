@@ -3,12 +3,18 @@ import jsPDF from 'jspdf';
 
 let pdfDirectBusy = false;
 
+const A4_WIDTH_PX = 794;
+const A4_HEIGHT_PX = 1123;
+const A4_WIDTH_MM = 210;
+const A4_HEIGHT_MM = 297;
+
 function getPdfButton(target) {
   const button = target && target.closest && target.closest('button');
   if (!button || button.disabled) return null;
   const text = String(button.textContent || '').trim().toLowerCase();
-  if (text.includes('voir pdf')) return { button: button, mode: 'preview' };
-  if (text.includes('exporter pdf')) return { button: button, mode: 'download' };
+  if (!text.includes('pdf')) return null;
+  if (text.includes('voir')) return { button: button, mode: 'preview' };
+  if (text.includes('exporter') || text.includes('télécharger') || text.includes('telecharger')) return { button: button, mode: 'download' };
   return null;
 }
 
@@ -37,12 +43,12 @@ function preparePdfClone(original) {
   clone.style.setProperty('position', 'relative', 'important');
   clone.style.setProperty('left', '0', 'important');
   clone.style.setProperty('top', '0', 'important');
-  clone.style.setProperty('width', '794px', 'important');
-  clone.style.setProperty('height', '1123px', 'important');
-  clone.style.setProperty('min-width', '794px', 'important');
-  clone.style.setProperty('min-height', '1123px', 'important');
-  clone.style.setProperty('max-width', '794px', 'important');
-  clone.style.setProperty('max-height', '1123px', 'important');
+  clone.style.setProperty('width', `${A4_WIDTH_PX}px`, 'important');
+  clone.style.setProperty('height', `${A4_HEIGHT_PX}px`, 'important');
+  clone.style.setProperty('min-width', `${A4_WIDTH_PX}px`, 'important');
+  clone.style.setProperty('min-height', `${A4_HEIGHT_PX}px`, 'important');
+  clone.style.setProperty('max-width', `${A4_WIDTH_PX}px`, 'important');
+  clone.style.setProperty('max-height', `${A4_HEIGHT_PX}px`, 'important');
   clone.style.setProperty('margin', '0', 'important');
   clone.style.setProperty('transform', 'none', 'important');
   clone.style.setProperty('scale', '1', 'important');
@@ -66,13 +72,70 @@ function createHiddenPdfWorkspace() {
   workspace.style.setProperty('position', 'fixed', 'important');
   workspace.style.setProperty('left', '-12000px', 'important');
   workspace.style.setProperty('top', '0', 'important');
-  workspace.style.setProperty('width', '794px', 'important');
-  workspace.style.setProperty('height', '1123px', 'important');
+  workspace.style.setProperty('width', `${A4_WIDTH_PX}px`, 'important');
+  workspace.style.setProperty('height', `${A4_HEIGHT_PX}px`, 'important');
   workspace.style.setProperty('overflow', 'visible', 'important');
   workspace.style.setProperty('background', '#fff', 'important');
   workspace.style.setProperty('z-index', '-1', 'important');
   document.body.appendChild(workspace);
   return workspace;
+}
+
+function isAlmostWhite(data, index) {
+  return data[index] > 248 && data[index + 1] > 248 && data[index + 2] > 248;
+}
+
+function cropLargeWhiteMargins(canvas) {
+  const ctx = canvas.getContext('2d', { willReadFrequently: true });
+  if (!ctx) return canvas;
+
+  const width = canvas.width;
+  const height = canvas.height;
+  const image = ctx.getImageData(0, 0, width, height);
+  const data = image.data;
+  let minX = width;
+  let minY = height;
+  let maxX = -1;
+  let maxY = -1;
+
+  for (let y = 0; y < height; y += 1) {
+    for (let x = 0; x < width; x += 1) {
+      const index = (y * width + x) * 4;
+      if (!isAlmostWhite(data, index)) {
+        if (x < minX) minX = x;
+        if (y < minY) minY = y;
+        if (x > maxX) maxX = x;
+        if (y > maxY) maxY = y;
+      }
+    }
+  }
+
+  if (maxX < 0 || maxY < 0) return canvas;
+
+  const padding = 4;
+  minX = Math.max(0, minX - padding);
+  minY = Math.max(0, minY - padding);
+  maxX = Math.min(width - 1, maxX + padding);
+  maxY = Math.min(height - 1, maxY + padding);
+
+  const cropWidth = maxX - minX + 1;
+  const cropHeight = maxY - minY + 1;
+  const hasHugeHorizontalMargin = cropWidth < width * 0.88;
+  const hasHugeVerticalMargin = cropHeight < height * 0.88;
+
+  if (!hasHugeHorizontalMargin && !hasHugeVerticalMargin) return canvas;
+
+  const cropped = document.createElement('canvas');
+  cropped.width = cropWidth;
+  cropped.height = cropHeight;
+  const croppedCtx = cropped.getContext('2d');
+  croppedCtx.drawImage(canvas, minX, minY, cropWidth, cropHeight, 0, 0, cropWidth, cropHeight);
+  return cropped;
+}
+
+function addCanvasFullPage(pdf, canvas) {
+  const cleanCanvas = cropLargeWhiteMargins(canvas);
+  pdf.addImage(cleanCanvas.toDataURL('image/jpeg', 1), 'JPEG', 0, 0, A4_WIDTH_MM, A4_HEIGHT_MM);
 }
 
 async function makeOriginalPdf() {
@@ -88,10 +151,10 @@ async function makeOriginalPdf() {
 
     const canvas = await html2canvas(clone, {
       scale: 2,
-      width: 794,
-      height: 1123,
-      windowWidth: 794,
-      windowHeight: 1123,
+      width: A4_WIDTH_PX,
+      height: A4_HEIGHT_PX,
+      windowWidth: A4_WIDTH_PX,
+      windowHeight: A4_HEIGHT_PX,
       scrollX: 0,
       scrollY: 0,
       backgroundColor: '#fff'
@@ -100,7 +163,7 @@ async function makeOriginalPdf() {
     workspace.remove();
 
     if (index) pdf.addPage('a4', 'portrait');
-    pdf.addImage(canvas.toDataURL('image/jpeg', 1), 'JPEG', 0, 0, 210, 297);
+    addCanvasFullPage(pdf, canvas);
   }
 
   return pdf;
