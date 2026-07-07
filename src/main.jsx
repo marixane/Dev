@@ -15,13 +15,10 @@ import './mobile-responsive.css';
 import './bar-mark-vertical.css';
 import './bar-mark-click-guard.js';
 import './photo-buttons-below-zoom.css';
-// import './clear-bar-marks-on-title-points.js';
 import './small-toggle-icons.css';
 import './live-lines-toggle.css';
 import './compact-side-menu.css';
-// import './homework-hide-ribbon.js';
 import './points-buttons-hitbox.css';
-// import './clear-bar-marks-on-exercise-count.js';
 import './narrow-side-menu.css';
 import './rounded-header-corners.css';
 import './exercise-under-header-spacing.css';
@@ -31,23 +28,14 @@ import './auto-scale-a4-preview.css';
 import './white-mask-fix.css';
 import './page-date-footer.css';
 import './page-date-footer-setting.js';
-// import './page-date-footer.js';
 import './note-scale-buttons.css';
 import './note-scale-short-labels.js';
-// import './note-scale-button-labels.js';
-// import './note-counter-pts.js';
 import './hide-single-page-number.css';
-// import './hide-single-page-number.js';
-// import './page-count-singular.js';
-// import './points-label-pts.js';
 import './clear-toggle-icons.css';
 import './menu-title-reglages.css';
-// import './menu-title-reglages.js';
 import './export-pdf-clear.css';
-// import './export-pdf-clear.js';
 import './discreet-exercise-points.css';
 import './discreet-duration-control.css';
-// import './fix-points-parentheses.js';
 import './pdf-exercise-points-clean.css';
 import './french-pdf-header-nudge.css';
 import './homework-exercise-title-fix.css';
@@ -62,7 +50,6 @@ import './free-mode-clean.css';
 import './free-mode-clean.js';
 import './homework-disabled-settings.css';
 import './homework-disabled-settings.js';
-// import './a4-overview.js';
 import './active-settings-green.css';
 import './arabic-toggle-label-bigger.css';
 import './a4-exam-title.js';
@@ -85,53 +72,5 @@ import './mobile-phone-force.js';
 import './mobile-touch-drag.js';
 import './mobile-exercice-touch-zone.css';
 import './line-grid-mode.js';
-import './cahier-texte.css';
-import './cahier-left-margin-100.css';
-import './cahier-top-space-fix.css';
-import './cahier-page-numbers.css';
-import './cahier-hide-extra-school-year.css';
-import './cahier-group-box-polish.css';
-import './cahier-fixed-five-entries.css';
-import './cahier-session-fit.css';
-import './cahier-session-duration.js';
-import './cahier-class-label-large.js';
-import './cahier-duration-right.css';
-import './cahier-first-page-clean.css';
-import './cahier-table-exams-polish.css';
-import './cahier-auto-fit-many-classes.css';
-import './cahier-main-cover-page.css';
-import './cahier-main-cover-page.js';
-// Désactivé : ce helper réordonne les pages à chaque saisie et peut bloquer Safari.
-// import './cahier-lycee-events-inline.js';
-import './cahier-single-autres-group.css';
-import './cahier-rename-cover-autres-safe.js';
-import './cahier-exams-groups-page.css';
-import './cahier-exams-groups-page.js';
-// Désactivé : ce guard DOM peut bloquer Safari pendant la saisie.
-// import './cahier-hide-holiday-session-duplicates.js';
-
-// Bouton PDF Safari-safe : permanent, devant tout, sans mutation DOM web.
-// Il ne modifie les pages qu'au moment de générer le PDF.
-import './cahier-pdf-button-safari-safe.js';
-import './cahier-pdf-class-size-fix.js';
-
-// Désactivé : ce helper DOM faisait buguer l'ajout de plusieurs séances.
-// import './cahier-group-cover-july10-light.js';
-
-// RESET STABILITÉ : autres scripts DOM cahier désactivés pendant la saisie.
-// import './cahier-cover-zellige-fix.js';
-// import './cahier-window-scroll-fix.js';
-// import './cahier-force-scroll.js';
-// import './cahier-empty-autres-groups.js';
-// import './cahier-pdf-export-button.js';
-// import './cahier-event-day-clean.js';
-// import './cahier-cover-page.js';
-// import './cahier-group-cover-pages.js';
-// import './cahier-exams-footer.js';
-// import './cahier-exam-events.js';
-// import './cahier-dedupe-holiday-classes.js';
-// import './cahier-cover-info-panel.js';
-// import './cahier-hide-empty-group-pages.js';
-// import './cahier-july-complete.js';
 
 createRoot(document.getElementById('root')).render(<React.StrictMode><App /></React.StrictMode>);
